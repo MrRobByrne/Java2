@@ -1,44 +1,44 @@
+class Circle 
+{
 
-class Circle {
   private int radius;
-  private SimplePoint origin;
+  private SimplePoint center;
 
-  public Circle(){
-    radius = 0;
-    origin = new SimplePoint(0, 0);
+  public Circle() 
+  {
+    radius = 1;
+    center = new SimplePoint(0,0);
   }
 
-  public Circle(SimplePoint p) {
-    radius = 0;
-    origin = p;
+  public Circle(int radius) 
+  {
+    this.radius = radius;
   }
 
-  public Circle(int m){
-    radius = m;
-    origin = new SimplePoint(0, 0);
+  public Circle(SimplePoint center) 
+  {
+    this.center = center;
   }
 
-  public Circle(int m, SimplePoint p){
-    radius = m;
-    origin = p;
+  public Circle(int radius, SimplePoint center) 
+  {
+    this.center = center;
+    this.radius = radius;
   }
 
-  public double area() {
-    return Math.PI * Math.pow(radius,2);
+  public double area() 
+  {
+    return 3.14 * radius * radius;
   }
 
-  public double circumference(){
-    return Math.PI * radius * 2;
-  }
+  public double circumference() 
+  {
+    return 3.14 * (2 * radius);
+  } 
 
-  public String toString() {
-    String s = origin.toString().concat("\rradius" + radius);
+  public String toString() 
+  {
+    String s = center.toString().concat("\nradius: " + radius + "\ncenter: " + center);
     return s;
   }
-
-  public void print(){
-    System.out.println("area" + area());
-    System.out.println("circumference" + circumference());
-  }
 }
-

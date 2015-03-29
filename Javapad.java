@@ -1,15 +1,22 @@
+// Javapad.java is a simple notpad created in Java as an extendion of JFrame
+// Implaments 3 ActionListeners, 2 to listen and 1 to quit the listener
+// BuildGUI() is used to build and configure the GUI
+//
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
- 
-public class Javapad extends JFrame {
+
+public class Javapad extends JFrame 
+{
   private JMenuBar menuBar;
   private JMenu fileMenu;
   private JMenuItem n, open, save, exit;
 
-  public Javapad() {
+  public Javapad() 
+  {
     super("Javapad");
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setPreferredSize(new Dimension(640, 480));
@@ -17,68 +24,89 @@ public class Javapad extends JFrame {
     pack();
     setVisible(true);
   }
-	class NListener implements ActionListener{
-      private JTextArea area;
-      public NListener(JTextArea area){
-          this.area=area;
-      }
-      public void actionPerformed(ActionEvent e){
-          area.setText("");
-      }
+
+	class NListener implements ActionListener
+  {
+    private JTextArea area;
+    public NListener(JTextArea area)
+    {
+      this.area=area;
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+      area.setText("");
+    }
   }
 
-  class FileListener implements ActionListener {
+  class FileListener implements ActionListener 
+  {
     private JFileChooser fc;
     private JTextArea area;
 
-    public FileListener(JTextArea area) {
+    public FileListener(JTextArea area) 
+    {
       fc = new JFileChooser();
       this.area = area;
     }
 
-    public void actionPerformed(ActionEvent e) {
-     if(e.getSource() == open) {
+    // ActionPerformed defines the actions performed by open and save menu options.
+    public void actionPerformed(ActionEvent e) 
+    {
+     
+     if(e.getSource() == open) 
+     {
         int returnVal = fc.showOpenDialog(Javapad.this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
+        
+        if (returnVal == JFileChooser.APPROVE_OPTION) 
+        {
 
-	try {
-	File file = fc.getSelectedFile();
-	FileReader in = new FileReader(file);
-	int size=(int)file.length();
-	char data[]= new char[size];
-	in.read(data, 0, size);
-	String s = new String(data);
-	area.setText(s);
-		}
+        	try 
+          {
+          	File file = fc.getSelectedFile();
+          	FileReader in = new FileReader(file);
+          	int size=(int)file.length();
+          	char data[]= new char[size];
+          	in.read(data, 0, size);
+          	String s = new String(data);
+          	area.setText(s);
+		      } // try
 	
-          catch (IOException exc) {
+          catch (IOException exc) 
+          {
             exc.printStackTrace();
             System.exit(1);
-          }
+          } // catch
 
-        }
-      }
-      else if(e.getSource() == save) {
+        } // if
+      } // if
+
+      else if(e.getSource() == save) 
+      {
         int returnVal = fc.showSaveDialog(Javapad.this);
-	if (returnVal == JFileChooser.APPROVE_OPTION) {
-          try {
-	    File file = fc.getSelectedFile();
-	FileWriter fw = new FileWriter(file);
-			PrintWriter out = new PrintWriter(fw);
-			out.print(area);
-			out.close();
-		}
-          catch(IOException exc) {
+        if (returnVal == JFileChooser.APPROVE_OPTION) 
+        {
+          try 
+          {
+            File file = fc.getSelectedFile();
+            FileWriter fw = new FileWriter(file);
+      			PrintWriter out = new PrintWriter(fw);
+      			out.print(area);
+      			out.close();
+		      } // try
+          
+          catch(IOException exc) 
+          {
             exc.printStackTrace();
             System.exit(1);
-          }
-        }
-      }
+          } // catch
+        } // if
+      } // else if
     }
   }
 
-
-  private void buildGUI() {
+  // Build and configure the GUI
+  private void buildGUI() 
+  {
     Container container = this.getContentPane();
 
     menuBar = new JMenuBar();
@@ -111,10 +139,10 @@ public class Javapad extends JFrame {
     JScrollPane sp = new JScrollPane(edit);
     sp.setPreferredSize(new Dimension(450, 100));
     container.add(sp, BorderLayout.CENTER);
-	QuitListener ql= new QuitListener();
-	exit.addActionListener(ql);
-	NListener nl = new NListener(edit);
-	n.addActionListener(nl);
+  	QuitListener ql= new QuitListener();
+  	exit.addActionListener(ql);
+  	NListener nl = new NListener(edit);
+  	n.addActionListener(nl);
 
     FileListener fl = new FileListener(edit);
     open.addActionListener(fl);
@@ -122,15 +150,21 @@ public class Javapad extends JFrame {
 
 
   }
-	class QuitListener implements  ActionListener{
-		public void actionPerformed(ActionEvent e){
+	
+  // ActionListener Quit
+  class QuitListener implements  ActionListener
+  {
+		public void actionPerformed(ActionEvent e)
+    {
 		System.exit(0);
 		}
 	}
 	
-  public static void main(String[] args) {
+  // Implamnetation of Javapad()
+  public static void main(String[] args) 
+  {
     Javapad jp = new Javapad();
   }
-	}
+}
 
 

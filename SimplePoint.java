@@ -1,25 +1,24 @@
 class SimplePoint {
+	private int x;
+	private int y;
 
-private int x;
-private int y;
+  	public SimplePoint() {
+    	x = 0;
+    	y = 0;
+  	}
 
-public SimplePoint() {
-  x = 0;
-  y = 0;
-}
+  	public SimplePoint(int x, int y) {
+    	this.x = x;
+    	this.y = y;
+  	}
 
-public SimplePoint (int x, int y) {
-  this.x = x;
-  this.y = y;
-}
+  	public void move(int m, int n) {
+    	x = m;
+    	y = n;
+  	}
 
-public int move(int m, int n) {
-  x = m;
-  y = n;
-}
-
-public String toString () {
-  String s = "x: " + x + " " + "y: " + y;
-  return s;
-}
+  	public String toString() {
+    	String s = "x: " + x + "\ty: " + y;
+    	return s;
+  	}
 }
