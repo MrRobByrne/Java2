@@ -7,6 +7,10 @@ public class Galaxy extends JPanel
     implements ActionListener
 {
 
+    /**
+     * Galaxy() construcer class
+     * define planets sizes, background color and timer
+     */
     public Galaxy()
     {
         setPreferredSize(new Dimension(420, 420));
@@ -20,6 +24,11 @@ public class Galaxy extends JPanel
         timer.start();
     }
 
+    /**
+     * paintComponent() prints the components of the application
+     * prints the sun, mars, earth, and the moon
+     * @param g - the Graphics to paint to
+     */
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -30,29 +39,42 @@ public class Galaxy extends JPanel
         mars.paint(graphics2d);
     }
 
+    /**
+     * actionPerformed() defines the action of the components on screen
+     * in this case it is the rotation of the planets and moon
+     * @param actionevent [description]
+     */
     public void actionPerformed(ActionEvent actionevent)
     {
         angle++;
         if(angle > 360D)
             angle = 0.0D;
+        // Defines Earth's movement
         double d = 200D + 120D * Math.cos((6.25D * -angle) / 360D);
         double d1 = 200D + 120D * Math.sin((6.25D * -angle) / 360D);
         earth.updatePosition(d, d1);
+
+        // Defines Moon's movement
         double d2 = d + 40D * Math.cos((12.4D * angle) / 360D);
         double d3 = d1 + 40D * Math.sin((12.4D * angle) / 360D);
         moon.updatePosition(d2, d3);
+
+        // Defines Mars' movement
         double d4 = 200D + 40D * Math.cos((31.4D * angle) / 360D);
         double d5 = 200D + 40D * Math.sin((31.4D * angle) / 360D);
         mars.updatePosition(d4, d5);
         repaint();
     }
 
+    /**
+     * Main() creates a new Galaxy and runs the application
+     */
     public static void main(String args[])
     {
         Galaxy galaxy = new Galaxy();
         runApplication(galaxy);
     }
-
+    
     private Planet earth;
     private Planet sun;
     private Planet moon;
@@ -68,6 +90,8 @@ public class Galaxy extends JPanel
     {
         BG_COLOR = Color.BLACK;
     }
+
+    
     public static void runApplication(JPanel jpanel)
     {
         JFrame jframe = new JFrame();
